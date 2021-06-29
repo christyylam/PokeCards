@@ -1,5 +1,6 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import PokemonCard from '../components/PokemonCard';
+import '../styles.css';
 
 const SearchBar = () => {
      //hooks
@@ -17,6 +18,10 @@ const SearchBar = () => {
     setPokemonData(json);
 }
 
+// useEffect(() => {
+//     requestPokemon();
+// }, []);//eslint-disable-line react-hooks/exhaustive-deps
+
 const handleChange = (e) => {
     setPokemonName(e.target.value.toLowerCase());
 }
@@ -33,17 +38,13 @@ return (
                 id="search"
                 placeholder="Enter Pokemon Name"
                 onChange= {handleChange}
-                //during first rendering pokemonName is undefined so have to put the or statement
-                value={pokemonName || ''}
+                value={pokemonName}
             />
         <input type="submit" value= "Search Pokemon" id= "searchButton"/>
     </form>
-    <PokemonCard 
-        pokemon = {pokemonData}
-    />
+        <PokemonCard pokemon = {pokemonData}/>
     </div>
 )
-
 }
 
 export default SearchBar;
