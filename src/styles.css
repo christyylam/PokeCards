@@ -57,15 +57,8 @@ body {
     padding: 20px;
     text-align: left;
     margin:0 auto;
+    box-shadow: 10px 10px 10px #3D7DCA;
 
-}
-
-.card img {
-    width: 200px;
-    /*centering image*/
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .card h1 {
@@ -73,6 +66,32 @@ body {
     text-align: center;
 }
 
-.card progress {
+/* .card progress {
     display: inline;
+} */
+
+.viewImages {
+    display: flex;
+    justify-content: space-between;
 }
+
+.card img {
+    width: 200px;
+    /*centering image*/
+    /* display: block; */
+    /* display: inline; */
+}
+
+#scrollButton {
+    text-decoration: none;
+    padding: 8px 8px;
+    height: 30px;
+    margin: 60px 0px 60px;
+    background-color: #f1f1f1;
+    color: #3D7DCA;
+    font-size: 25px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+

@@ -40,7 +40,7 @@ return (
                 onChange= {handleChange}
                 value={pokemonName}
             />
-        <input type="submit" value= "Search Pokemon" id= "searchButton"/>
+        <input type="submit" value= "Search Pokemon!" id= "searchButton"/>
     </form>
         <PokemonCard pokemon = {pokemonData}/>
     </div>
