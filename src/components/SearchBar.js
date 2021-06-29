@@ -6,7 +6,7 @@ const SearchBar = () => {
      //hooks
     //1st param declares a state variable (eg pokemon)
     //pokmeon is all the data from the api and is used to make the pokemon cards
-    const [pokemonData, setPokemonData] = useState([]);
+    const [pokemonData, setPokemonData] = useState(null);
     const [pokemonName, setPokemonName] = useState("");
 
     //requesting pokemon data from the api
@@ -29,6 +29,7 @@ const handleChange = (e) => {
 const handleSubmit = (e) => {
     e.preventDefault();
     requestPokemon();
+    console.log(pokemonData);
 }
 
 return (
@@ -42,7 +43,8 @@ return (
             />
         <input type="submit" value= "Search Pokemon!" id= "searchButton"/>
     </form>
-        <PokemonCard pokemon = {pokemonData}/>
+        {/* {pokemonData ? <PokemonCard pokemon = {pokemonData}/> : <p>not working</p> } */}
+        {pokemonData && <PokemonCard pokemon = {pokemonData}/>}
     </div>
 )
 }
