@@ -23,6 +23,7 @@
     border-radius: 10px;
     margin: 30px;
     text-align:center;
+    box-shadow: 5px 5px 5px #FFCB05;
 }
 
 #searchButton {
@@ -32,6 +33,7 @@
     margin: 0px auto 40px;
     border-radius: 5px;
     display: block;
+    box-shadow: 5px 5px 5px #3D7DCA;
 }
 
 /* to make the linear gradient background not repeat */

@@ -1,11 +1,10 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import PokemonCard from '../components/PokemonCard';
 import '../styles.css';
 
 const SearchBar = () => {
      //hooks
-    //1st param declares a state variable (eg pokemon)
-    //pokmeon is all the data from the api and is used to make the pokemon cards
+     //setting initial state to null instead of [] because requestPokemon gives back an object not an array
     const [pokemonData, setPokemonData] = useState(null);
     const [pokemonName, setPokemonName] = useState("");
 
