@@ -1,71 +1,78 @@
-
 .App {
-    margin: 30px;
-    display: flex;
-    justify-content: center;
-    font-family:Arial, Helvetica, sans-serif
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .TitleSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .SearchBar {
-    text-align: center;
+  text-align: center;
 }
 
 .SearchBar input {
-    width: 400px;
-    height: 30px;
-    border: none;
-    border-radius: 10px;
-    margin: 30px;
-    text-align:center;
-    box-shadow: 5px 5px 5px #FFCB05;
+  width: 400px;
+  height: 30px;
+  border: none;
+  border-radius: 10px;
+  margin: 30px;
+  text-align: center;
+  box-shadow: 5px 5px 5px #ffcb05;
 }
 
 #searchButton {
-    width: 180px;
-    height: 30px;
-    /*top rightleft bottom*/
-    margin: 0px auto 40px;
-    border-radius: 5px;
-    display: block;
-    box-shadow: 5px 5px 5px #3D7DCA;
+  width: 180px;
+  height: 30px;
+  /*top rightleft bottom*/
+  margin: 0px auto 40px;
+  border-radius: 5px;
+  display: block;
+  box-shadow: 5px 5px 5px #3d7dca;
 }
 
 /* to make the linear gradient background not repeat */
 html {
-    min-height: 100%
+  min-height: 100%;
 }
-    
+
 body {
-    background-image: linear-gradient(#e66465, #9198e5);
-    margin: 0%;
-    padding: 0%;
+  background-image: linear-gradient(#e66465, #9198e5);
+  margin: 0%;
+  padding: 0%;
 }
 
 .card {
-    /* margin: 5px; */
-    width: 300px;
-    background-color: white;
-    border-radius: 5px;
-    border-style: solid;
-    border-color: #FFCB05;
-    border-width: 10px;
-    font-size: 0.5em;
-    padding: 20px;
-    text-align: left;
-    margin:0 auto;
-    box-shadow: 10px 10px 10px #3D7DCA;
-
+  /* margin: 5px; */
+  width: 350px;
+  border: 12px solid #ffcb05;
+  border-radius: 10px;
+  font-size: 9px;
+  padding: 20px;
+  text-align: left;
+  margin: 0 auto;
+  box-shadow: 10px 10px 10px #3d7dca;
 }
 
-.card h1 {
-    font-size: 3em;
-    text-align: center;
+.name {
+  font-size: 28px;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.id {
+  font-size: 15px;
+  margin-left: 10px;
+}
+
+.hp {
+  font-size: 28px;
+  float: right;
 }
 
 /* .card progress {
@@ -73,27 +80,65 @@ body {
 } */
 
 .viewImages {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .card img {
-    width: 200px;
-    /*centering image*/
-    /* display: block; */
-    /* display: inline; */
+  width: 200px;
+  background: white;
+  /* background-image: url(./components/images/background.png); */
+  border: 5px solid #ffcb05;
 }
 
 #scrollButton {
-    text-decoration: none;
-    padding: 8px 8px;
-    height: 30px;
-    margin: 60px 0px 60px;
-    background-color: #f1f1f1;
-    color: #3D7DCA;
-    font-size: 25px;
-    font-weight: bold;
-    border-radius: 5px;
+  text-decoration: none;
+  padding: 8px 8px;
+  height: 30px;
+  margin: 60px 0px 60px;
+  background-color: #f1f1f1;
+  color: #3d7dca;
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 5px;
 }
 
+.viewTypes {
+  font-size: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+}
 
+.type {
+  border: 3px solid black;
+  border-radius: 5px;
+  padding: 3px;
+  margin: auto 15px;
+}
+
+.measurements {
+  text-align: center;
+}
+
+.progressBarBorder {
+  border: 2px solid black;
+  margin-bottom: 2px;
+  border-radius: 10px;
+  max-width: 350px;
+}
+
+.progressBar {
+  background-color: #3d7dca;
+  font-size: 12px;
+  padding: 2px;
+  /* top left top right bottom right bottom left */
+  border-radius: 10px 0 0 10px;
+}
+
+p {
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  margin-top: 4px;
+}

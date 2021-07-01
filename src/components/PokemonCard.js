@@ -1,145 +1,183 @@
-import {useState} from 'react';
-import '../styles.css';
-
+import { useEffect, useState } from "react";
+import "../styles.css";
 
 const PokemonCard = (props) => {
-    //have to put props.pokemon && as a check for undefined props.pokemon
-    //name = props.pokemon && props.pokemon.name (the ? replaces the &&)
-    const name = props.pokemon?.name?.charAt(0).toUpperCase() + props.pokemon?.name?.slice(1);
-    const id = props.pokemon?.id; 
-    const height = props.pokemon?.height;
-    const weight = props.pokemon?.weight;
-    const abilities = props.pokemon?.abilities?.map((ability, index) => {
-        return <li key={index}>{ability.ability.name}</li>
-    })
-    const types = props.pokemon?.types?.map((type, index) => {
-        return <li key={index}>{type.type.name}</li>
-    })
-    // const statCategories = props.pokemon?.stats?.map((stat, index) => {
-    //     return <li key={index}>{stat.stat.name}</li>
-    // })
-    const statVals = props.pokemon?.stats?.map((stat, index) => {
-        return <li key={index}>{stat.base_stat}</li>
-    })
+  //have to put props.pokemon && as a check for undefined props.pokemon
+  //name = props.pokemon && props.pokemon.name (the ? replaces the &&)
+  const name =
+    props.pokemon?.name?.charAt(0).toUpperCase() +
+    props.pokemon?.name?.slice(1);
+  const id = props.pokemon?.id;
+  //height is given in decimeters so have to convert to m (1 decimeter=0.1m)
+  const height = Math.round(props.pokemon?.height * 0.1 * 10) / 10;
+  //weight is given in hectograms so have to convert to kg (1 hectogram=0.1kg)
+  const weight = Math.round(props.pokemon?.weight * 0.1 * 10) / 10;
+  const abilities = props.pokemon?.abilities?.map((ability, index) => {
+    return <li key={index}>{ability.ability.name}</li>;
+  });
+  const types = props.pokemon?.types?.map((type, index) => {
+    return <span key={index}>{type.type.name}</span>;
+  });
+  const statVals = props.pokemon?.stats?.map((stat, index) => {
+    return <span key={index}>{stat.base_stat}</span>;
+  });
 
-//handling the different sprite images
-    //default image
-    const defaultImage = props.pokemon?.sprites?.front_default;
-     //putting all the possible image links into an array
-     const images = props.pokemon?.sprites;
-     const allImages = [];
-     props.pokemon && Object.entries(images).forEach(image => {
-         if(image[1] !== null && typeof image[1] === 'string') {
-             allImages.push(image[1])
-         }
-     })
-     //finding the index of the default image
-     let defaultImageIndex = (allImages.findIndex(image => image === defaultImage));
-     //hook to set currentImageIndex
-     const [currentImageIndex, setCurrentImageIndex] = useState(defaultImageIndex);
+  //handling the different sprite images
+  //default image
+  const defaultImage = props.pokemon?.sprites?.front_default;
+  //putting all the possible image links into an array
+  const images = props.pokemon?.sprites;
+  const allImages = [];
+  props.pokemon &&
+    Object.entries(images).forEach((image) => {
+      if (image[1] !== null && typeof image[1] === "string") {
+        allImages.push(image[1]);
+      }
+    });
+  //finding the index of the default image
+  let defaultImageIndex = allImages.findIndex(
+    (image) => image === defaultImage
+  );
 
-     console.log(currentImageIndex);
-    const handlePrev = (e) => {
-         if(currentImageIndex - 1 >= 0) {
-             setCurrentImageIndex(currentImageIndex- 1);
-         }
+  //useEffect to make sure the pokemon image is the forward facing one each time a card times
+  useEffect(() => {
+    setCurrentImageIndex(defaultImageIndex);
+  }, [props.pokemon, defaultImageIndex]);
+
+  //hook to set currentImageIndex
+  const [currentImageIndex, setCurrentImageIndex] = useState(defaultImageIndex);
+
+  //handle button button clicks
+  const handlePrev = (e) => {
+    if (currentImageIndex - 1 >= 0) {
+      setCurrentImageIndex(currentImageIndex - 1);
     }
-
-    const handleNext = (e) => {
-        if(currentImageIndex + 1 < allImages.length) {
-            setCurrentImageIndex(currentImageIndex +1);
-        }
+  };
+  const handleNext = (e) => {
+    if (currentImageIndex + 1 < allImages.length) {
+      setCurrentImageIndex(currentImageIndex + 1);
     }
+  };
 
+  //setting up values for stat progress bars
+  //from bulbapedia: base stats range from 1-255 (so 100% progress bar would be stat value of 255 since max is 255)
+  //then multiplying by 3.5 because maxwidth of bar is 350px
+  const hpVal = statVals[0].props.children;
+  const atkVal = statVals[1].props.children;
+  const atkBar = Math.round((atkVal / 255) * 100) * 3.5;
+  const defVal = statVals[2].props.children;
+  const defBar = Math.round((defVal / 255) * 100) * 3.5;
+  const specialAtkVal = statVals[3].props.children;
+  const specialAtkBar = Math.round((specialAtkVal / 255) * 100) * 3.5;
+  const specialDefVal = statVals[4].props.children;
+  const specialDefBar = Math.round((specialDefVal / 255) * 100) * 3.5;
+  const speedVal = statVals[5].props.children;
+  const speedBar = Math.round((speedVal / 255) * 100) * 3.5;
 
-    // let hpVal = statVals[0].props.children;
-    // document.getElementById("hp").value= hpVal;
+  //handling card background colour change
+  const allColours = {
+    normal: "#FEF5E7",
+    fire: "#ff751a",
+    fighting: "#D98880",
+    water: "#AED6F1",
+    flying: "#E8DAEF",
+    grass: "#7AC74C",
+    poison: "#A33EA1",
+    electric: "#F7D02C",
+    ground: "#E2BF65",
+    psychic: "#FDB9DC",
+    rock: "#EDBB99",
+    ice: "#96D9D6",
+    bug: "#A6B91A",
+    dragon: "#B3D4FF",
+    ghost: "#AC80FF",
+    dark: "#979797",
+    steel: "#E4E4E4 ",
+    fairy: "#FFDFF3",
+  };
 
-    // handling card background colour change
-    function changeBackground(colour) {
-        let card = document.getElementsByClassName('card')[0];
-        if (card) {
-            card.style.backgroundColor = colour;
-        }
-    }
-    
-    switch(types[0].props.children) {
-        case 'normal':
-            changeBackground('#FEF5E7');
-            break;
-        case 'fire':
-           changeBackground('#ff751a');
-           break;
-        case 'fighting':
-            changeBackground('#D98880');
-            break;
-        case 'water':
-            changeBackground('#AED6F1');
-            break;
-        case 'flying':
-            changeBackground('#E8DAEF ');
-            break;
-        case 'grass':
-            changeBackground('#E2FFB5');
-            break;
-        case 'poison':
-            changeBackground('#AF7AC5');
-            break;
-        case 'electric':
-            changeBackground('#FFF1AE');
-            break;
-        case 'ground':
-            changeBackground('#AF601A');
-            break;
-        case 'psychic':
-            changeBackground('#FDB9DC');
-            break;
-        case 'rock':
-            changeBackground('#EDBB99');
-            break;
-        case 'ice':
-            changeBackground('#EBF5FB');
-            break;
-        case 'bug':
-            changeBackground('#E3FDB9 ');
-            break;
-        case 'dragon':
-            changeBackground('#B3D4FF');
-            break;
-        case 'ghost':
-            changeBackground('#AC80FF');
-            break;
-        case 'dark':
-            changeBackground('#979797');
-            break;
-        case 'steel':
-            changeBackground('#E4E4E4 ');
-            break;
-        case 'fairy':
-            changeBackground('#FFDFF3');
-            break;
-        default:
-            break; 
-    }
+  const CardBackground = {
+    backgroundColor: allColours[types[0].props.children],
+  };
 
-
-    return (
-        <div className="card">
-            <h1>{name} </h1>
-            <div className="viewImages">
-            <a id="scrollButton" href="/#" class="previous round" onClick= {handlePrev}>&#8249;</a>
-            <img src= {allImages[currentImageIndex]} alt=""></img>
-            <a id="scrollButton" href="/#" class="next round" onClick={handleNext}>&#8250;</a>
+  //function to render the pokemon card
+  const renderCard = () => {
+    if (props.pokemon) {
+      return (
+        <div className="card" style={CardBackground}>
+          <div>
+            <span className="name">{name} </span>
+            <span className="id">ID #{id}</span>
+            <span className="hp">
+              HP <b>{hpVal}</b>
+            </span>
+          </div>
+          <div className="viewImages">
+            <a
+              id="scrollButton"
+              href="/#"
+              class="previous round"
+              onClick={handlePrev}
+            >
+              &#8249;
+            </a>
+            <img src={allImages[currentImageIndex]} alt=""></img>
+            <a
+              id="scrollButton"
+              href="/#"
+              class="next round"
+              onClick={handleNext}
+            >
+              &#8250;
+            </a>
+          </div>
+          <div className="viewTypes">
+            <span className="type">{types[0]}</span>
+            {types[1] ? <span className="type">{types[1]}</span> : <p></p>}
+          </div>
+          <div className="measurements">
+            <h2>
+              Height: {height} m &nbsp;|&nbsp; Weight: {weight} kg
+            </h2>
+          </div>
+          {/* base stats */}
+          <p>Attack</p>
+          <div className="progressBarBorder">
+            <div className="progressBar" style={{ width: atkBar }}>
+              {atkVal}
             </div>
-            <h2 >ID: {id}</h2>
-            <h2>Types: {types}</h2>
-            <h2>Height: {height} Weight: {weight}</h2>
-            <h2>Abilities:{abilities}</h2>  
-            <h2>Base Stats: {statVals}</h2>
-            {/* <progress id="hp" value= "hp" max="200"></progress>  */}
-
+          </div>
+          <p>Defense</p>
+          <div className="progressBarBorder">
+            <div className="progressBar" style={{ width: defBar }}>
+              {defVal}
+            </div>
+          </div>
+          <p>Special Attack</p>
+          <div className="progressBarBorder">
+            <div className="progressBar" style={{ width: specialAtkBar }}>
+              {specialAtkVal}
+            </div>
+          </div>
+          <p>Special Defense</p>
+          <div className="progressBarBorder">
+            <div className="progressBar" style={{ width: specialDefBar }}>
+              {specialDefVal}
+            </div>
+          </div>
+          <p>Speed</p>
+          <div className="progressBarBorder">
+            <div className="progressBar" style={{ width: speedBar }}>
+              {speedVal}
+            </div>
+          </div>
+          <h2>Abilities: {abilities}</h2>
         </div>
-    )
-}
+      );
+    }
+  };
+
+  return <div>{renderCard()}</div>;
+};
 
 export default PokemonCard;
