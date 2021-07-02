@@ -4,11 +4,8 @@ import Random from "../components/Random";
 import "../styles.css";
 
 const SearchBar = () => {
-  //hooks
-  //setting initial state to null instead of [] because requestPokemon gives back an object not an array
   const [pokemonData, setPokemonData] = useState(null);
   const [pokemonName, setPokemonName] = useState("");
-  //   const [allPokemon, setAllPokemon] = useState([]);
 
   //requesting pokemon data for user inputted pokemon from the api
   const requestPokemon = async () => {
@@ -17,16 +14,8 @@ const SearchBar = () => {
     setPokemonData(json);
   };
 
-  //   useEffect(() => {
-  //     const requestPokeNames = async () => {
-  //         const res = await fetch("https://pokeapi.co/api/v2/pokemon/");
-  //         const json = await res.json();
-  //         setAllPokemon(json);
-  //     }
-  //     requestPokeNames();
-  //   }, []);
-
   const handleChange = (e) => {
+    e.preventDefault();
     setPokemonName(e.target.value.toLowerCase());
   };
 

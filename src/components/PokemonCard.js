@@ -3,7 +3,6 @@ import "../styles.css";
 
 const PokemonCard = (props) => {
   //have to put props.pokemon && as a check for undefined props.pokemon
-  //name = props.pokemon && props.pokemon.name (the ? replaces the &&)
   const name =
     props.pokemon?.name?.charAt(0).toUpperCase() +
     props.pokemon?.name?.slice(1);
@@ -47,7 +46,7 @@ const PokemonCard = (props) => {
   //hook to set currentImageIndex
   const [currentImageIndex, setCurrentImageIndex] = useState(defaultImageIndex);
 
-  //handle button button clicks
+  //handle button clicks
   const handlePrev = (e) => {
     e.preventDefault();
     if (currentImageIndex - 1 >= 0) {
@@ -177,7 +176,6 @@ const PokemonCard = (props) => {
       );
     }
   };
-
   return <div>{renderCard()}</div>;
 };
 

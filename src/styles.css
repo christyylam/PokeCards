@@ -1,3 +1,12 @@
+body {
+  /* background-image: linear-gradient(#e66465, #9198e5); */
+  /* background image credit: https://www.furaffinity.net/view/21303776/ */
+  background-image: url("./components/images/background.jpeg");
+  background-size: cover;
+  margin: 0%;
+  padding: 0%;
+}
+
 .App {
   margin: 30px;
   display: flex;
@@ -35,22 +44,12 @@
   box-shadow: 5px 5px 5px #3d7dca;
 }
 
-/* to make the linear gradient background not repeat */
-html {
-  min-height: 100%;
-}
-
-body {
-  /* background-image: linear-gradient(#e66465, #9198e5); */
-  /* background image credit: https://www.furaffinity.net/view/21303776/ */
-  background-image: url("./components/images/background.jpeg");
-  background-size: cover;
-  margin: 0%;
-  padding: 0%;
+.randomPokeImg {
+  margin-top: 40px;
+  width: 200px;
 }
 
 .card {
-  /* margin: 5px; */
   width: 350px;
   border: 12px solid #ffcb05;
   border-radius: 10px;
@@ -142,7 +141,19 @@ p {
   margin-top: 4px;
 }
 
-.randomPokeImg {
-  margin-top: 40px;
-  width: 200px;
+h2 {
+  margin-top: 18px;
+}
+
+ul,
+li {
+  display: inline;
+}
+
+li {
+  border: solid 1px white;
+  padding: 5px;
+  margin: 5px;
+  background-color: #ddddb7;
+  border-radius: 5px;
 }
