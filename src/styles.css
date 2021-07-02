@@ -7,6 +7,10 @@ body {
   padding: 0%;
 }
 
+html {
+  min-height: 100%;
+}
+
 .App {
   margin: 30px;
   display: flex;
