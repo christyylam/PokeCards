@@ -39,7 +39,7 @@ const PokemonCard = (props) => {
     (image) => image === defaultImage
   );
 
-  //useEffect to make sure the pokemon image is the forward facing one each time a card times
+  //useEffect to make sure the pokemon image is the forward facing one each time a new card loads
   useEffect(() => {
     setCurrentImageIndex(defaultImageIndex);
   }, [props.pokemon, defaultImageIndex]);
@@ -49,11 +49,13 @@ const PokemonCard = (props) => {
 
   //handle button button clicks
   const handlePrev = (e) => {
+    e.preventDefault();
     if (currentImageIndex - 1 >= 0) {
       setCurrentImageIndex(currentImageIndex - 1);
     }
   };
   const handleNext = (e) => {
+    e.preventDefault();
     if (currentImageIndex + 1 < allImages.length) {
       setCurrentImageIndex(currentImageIndex + 1);
     }
@@ -61,7 +63,7 @@ const PokemonCard = (props) => {
 
   //setting up values for stat progress bars
   //from bulbapedia: base stats range from 1-255 (so 100% progress bar would be stat value of 255 since max is 255)
-  //then multiplying by 3.5 because maxwidth of bar is 350px
+  //then multiplying by 3.5 because maxwidth of bar is 350px instead of 100px (scaled up by 3.5)
   const hpVal = statVals[0].props.children;
   const atkVal = statVals[1].props.children;
   const atkBar = Math.round((atkVal / 255) * 100) * 3.5;
@@ -77,17 +79,17 @@ const PokemonCard = (props) => {
   //handling card background colour change
   const allColours = {
     normal: "#FEF5E7",
-    fire: "#ff751a",
+    fire: "#F73718",
     fighting: "#D98880",
     water: "#AED6F1",
     flying: "#E8DAEF",
     grass: "#7AC74C",
-    poison: "#A33EA1",
-    electric: "#F7D02C",
+    poison: "#b284be",
+    electric: "#f8de7e",
     ground: "#E2BF65",
     psychic: "#FDB9DC",
     rock: "#EDBB99",
-    ice: "#96D9D6",
+    ice: "#e7feff",
     bug: "#A6B91A",
     dragon: "#B3D4FF",
     ghost: "#AC80FF",
@@ -96,15 +98,14 @@ const PokemonCard = (props) => {
     fairy: "#FFDFF3",
   };
 
-  const CardBackground = {
-    backgroundColor: allColours[types[0].props.children],
-  };
-
   //function to render the pokemon card
   const renderCard = () => {
     if (props.pokemon) {
       return (
-        <div className="card" style={CardBackground}>
+        <div
+          className="card"
+          style={{ backgroundColor: allColours[types[0].props.children] }}
+        >
           <div>
             <span className="name">{name} </span>
             <span className="id">ID #{id}</span>

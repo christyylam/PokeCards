@@ -41,7 +41,10 @@ html {
 }
 
 body {
-  background-image: linear-gradient(#e66465, #9198e5);
+  /* background-image: linear-gradient(#e66465, #9198e5); */
+  /* background image credit: https://www.furaffinity.net/view/21303776/ */
+  background-image: url("./components/images/background.jpeg");
+  background-size: cover;
   margin: 0%;
   padding: 0%;
 }
@@ -75,20 +78,15 @@ body {
   float: right;
 }
 
-/* .card progress {
-    display: inline;
-} */
-
 .viewImages {
   display: flex;
   justify-content: space-between;
 }
 
 .card img {
-  width: 200px;
-  background: white;
-  /* background-image: url(./components/images/background.png); */
-  border: 5px solid #ffcb05;
+  width: 210px;
+  background: radial-gradient(closest-side, #fffacd, #ffa07a, #ebf8e1);
+  border: 5px inset #ffcb05;
 }
 
 #scrollButton {
@@ -123,6 +121,7 @@ body {
 
 .progressBarBorder {
   border: 2px solid black;
+  background-color: #fff8dc;
   margin-bottom: 2px;
   border-radius: 10px;
   max-width: 350px;
@@ -141,4 +140,9 @@ p {
   font-weight: bold;
   margin-bottom: 4px;
   margin-top: 4px;
+}
+
+.randomPokeImg {
+  margin-top: 40px;
+  width: 200px;
 }
